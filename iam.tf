@@ -11,6 +11,10 @@ locals {
 }
 }
 
+module "download" {
+  source = "github.com/goutamp/infra-code-template/templates"
+}
+
 resource "aws_iam_role" "support_role" {
   name               = "ADFS-${var.aws_account_name}-ApplicationAccess"
   assume_role_policy = "${data.template_file.saml_policy.rendered}"
@@ -25,7 +29,7 @@ resource "aws_iam_role" "support_role" {
 }
 
 data "template_file" "saml_policy" {
-  template = "${file("${path.module}/templates/assume-saml.json")}"
+  template = "${file("${path.module}terraform/modules/download/templates/assume-saml.json")}"
 
   vars = {
     account_id          = "${data.aws_caller_identity.this.account_id}"
@@ -43,7 +47,7 @@ resource "aws_iam_role_policy" "support_policy" {
 }
 
 data "template_file" "support_policy" {
-  template = "${file("${path.module}/templates/support-policy.json")}"
+  template = "${file("${path.module}terraform/modules/download/templates/support-policy.json")}"
 
   vars = {
     account_id          = "${data.aws_caller_identity.this.account_id}"
