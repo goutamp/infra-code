@@ -3,6 +3,8 @@
 
 # usage 
   '''
+
+  
   We need to use the following syntax to call this module.
   module "aws-adfs" {
      source            = "path of the git repo where module code has been configured"
@@ -11,8 +13,8 @@
      target_region     =  "${var.target_region}"
      aws_account_name  =  "${var.aws_account_name}"
 }
-
   '''
+ 
 
 # Variables
 
