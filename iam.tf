@@ -29,7 +29,7 @@ resource "aws_iam_role" "support_role" {
 }
 
 data "template_file" "saml_policy" {
-  template = "${file(".terraform/modules/download/templates/assume-saml.json")}"
+  template = "${file(".terraform/modules/download/aws-adfs.templates/assume-saml.json")}"
 
   vars = {
     account_id          = "${data.aws_caller_identity.this.account_id}"
@@ -47,7 +47,7 @@ resource "aws_iam_role_policy" "support_policy" {
 }
 
 data "template_file" "support_policy" {
-  template = "${file(".terraform/modules/download/templates/support-policy.json")}"
+  template = "${file(".terraform/modules/aws-adfs.download/templates/support-policy.json")}"
 
   vars = {
     account_id          = "${data.aws_caller_identity.this.account_id}"
